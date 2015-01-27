@@ -1,7 +1,7 @@
 
 var Test = require('segmentio-integration-tester');
+var mapper = require('../lib/mapper');
 var Knowtify = require('../');
-var mapper = require('../mapper');
 
 describe('Knowtify', function(){
   var knowtify;
@@ -23,7 +23,7 @@ describe('Knowtify', function(){
       .retries(2);
   });
 
-  describe('.validate()', function() {
+  describe('.validate()', function(){
     it('should not be valid without an api key', function(){
       delete settings.apiKey;
       test.invalid({}, settings);

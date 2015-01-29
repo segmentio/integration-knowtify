@@ -9,7 +9,7 @@ describe('Knowtify', function(){
   var test;
 
   beforeEach(function(){
-    settings = { apiKey: 'key' };
+    settings = { apiToken: '84fb4517d6d0c5b6acd1f4bf1048559d' };
     knowtify = new Knowtify(settings)
     test = Test(knowtify, __dirname);
     test.mapper(mapper);
@@ -19,13 +19,13 @@ describe('Knowtify', function(){
     test
       .name('Knowtify')
       .channels(['server', 'mobile', 'client'])
-      .ensure('settings.apiKey')
+      .ensure('settings.apiToken')
       .retries(2);
   });
 
   describe('.validate()', function(){
     it('should not be valid without an api key', function(){
-      delete settings.apiKey;
+      delete settings.apiToken;
       test.invalid({}, settings);
     });
 
@@ -41,11 +41,13 @@ describe('Knowtify', function(){
       });
     });
 
+    /*
     describe('group', function(){
       it('should map basic group', function(){
         test.maps('group-basic');
       });
     });
+    */
 
     describe('track', function(){
       it('should map basic track', function(){
@@ -53,23 +55,29 @@ describe('Knowtify', function(){
       });
     });
 
+    /*
     describe('page', function(){
       it('should map basic page', function(){
         test.maps('page-basic');
       });
     });
+    */
 
+    /*
     describe('screen', function(){
       it('should map basic screen', function(){
         test.maps('screen-basic');
       });
     });
+    */
 
+    /*
     describe('alias', function(){
       it('should map basic alias', function(){
         test.maps('alias-basic');
       });
     });
+    */
   });
 
   describe('.identify()', function(){
@@ -87,12 +95,13 @@ describe('Knowtify', function(){
     it('should error on invalid key', function(done){
       var json = test.fixture('identify-basic');
       test
-        .set({ apiKey: 'x' })
+        .set({ apiToken: 'x' })
         .identify(json.input)
-        .error('error message', done);
+        .error('cannot POST /hook/segment?token=x (401)', done);
     });
   });
 
+  /*
   describe('.group()', function(){
     it('should send basic group', function(done){
       var json = test.fixture('group-basic');
@@ -108,11 +117,12 @@ describe('Knowtify', function(){
     it('should error on invalid key', function(done){
       var json = test.fixture('group-basic');
       test
-        .set({ apiKey: 'x' })
+        .set({ apiToken: 'x' })
         .group(json.input)
         .error('error message', done);
     });
   });
+  */
 
   describe('.track()', function(){
     it('should send basic track', function(done){
@@ -129,12 +139,13 @@ describe('Knowtify', function(){
     it('should error on invalid key', function(done){
       var json = test.fixture('track-basic');
       test
-        .set({ apiKey: 'x' })
+        .set({ apiToken: 'x' })
         .track(json.input)
-        .error('error message', done);
+        .error('cannot POST /hook/segment?token=x (401)', done);
     });
   });
 
+  /*
   describe('.page()', function(){
     it('should send basic page', function(done){
       var json = test.fixture('page-basic');
@@ -150,12 +161,14 @@ describe('Knowtify', function(){
     it('should error on invalid key', function(done){
       var json = test.fixture('page-basic');
       test
-        .set({ apiKey: 'x' })
+        .set({ apiToken: 'x' })
         .page(json.input)
         .error('error message', done);
     });
   });
+  */
 
+  /*
   describe('.screen()', function(){
     it('should send basic screen', function(done){
       var json = test.fixture('screen-basic');
@@ -171,12 +184,14 @@ describe('Knowtify', function(){
     it('should error on invalid key', function(done){
       var json = test.fixture('screen-basic');
       test
-        .set({ apiKey: 'x' })
+        .set({ apiToken: 'x' })
         .screen(json.input)
         .error('error message', done);
     });
   });
+  */
 
+  /*
   describe('.alias()', function(){
     it('should send basic alias', function(done){
       var json = test.fixture('alias-basic');
@@ -192,9 +207,10 @@ describe('Knowtify', function(){
     it('should error on invalid key', function(done){
       var json = test.fixture('alias-basic');
       test
-        .set({ apiKey: 'x' })
+        .set({ apiToken: 'x' })
         .alias(json.input)
         .error('error message', done);
     });
   });
+  */
 });

@@ -65,7 +65,7 @@ describe('Knowtify', function(){
       test
         .set({ apiToken: 'x' })
         .identify(json.input)
-        .error('cannot POST /hook/segment?token=x (401)', done);
+        .error('Unexpected token B', done);
     });
   });
 
@@ -86,7 +86,7 @@ describe('Knowtify', function(){
       test
         .set({ apiToken: 'x' })
         .track(json.input)
-        .error('cannot POST /hook/segment?token=x (401)', done);
+        .error('Unexpected token B', done);
     });
   });
 });

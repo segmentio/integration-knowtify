@@ -1,7 +1,8 @@
 
-var Test = require('segmentio-integration-tester');
-var mapper = require('../lib/mapper');
 var Knowtify = require('../');
+var Test = require('segmentio-integration-tester');
+var assert = require('assert');
+var mapper = require('../lib/mapper');
 
 describe('Knowtify', function(){
   var knowtify;
@@ -65,7 +66,11 @@ describe('Knowtify', function(){
       test
         .set({ apiToken: 'x' })
         .identify(json.input)
-        .error('Unexpected token B', done);
+        .end(function(err) {
+          assert(err !== null);
+          assert((/Unexpected token B/).test(err.message));
+          done();
+        });
     });
   });
 
@@ -86,7 +91,11 @@ describe('Knowtify', function(){
       test
         .set({ apiToken: 'x' })
         .track(json.input)
-        .error('Unexpected token B', done);
+        .end(function(err) {
+          assert(err !== null);
+          assert((/Unexpected token B/).test(err.message));
+          done();
+        });
     });
   });
 });

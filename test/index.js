@@ -93,7 +93,15 @@ describe('Knowtify', function(){
         .track(json.input)
         .end(function(err) {
           assert(err !== null);
+          /*
+           * This is due to superagent attempting to parse "Bad Request" as JSON due to
+           * a Content-type header of application/json.
+           * These asserts ensure that the status code makes it through in all the
+           * ways it needs to for integration-worker to decide how to handle the error.
+           */
           assert((/Unexpected token B/).test(err.message));
+          assert.equal(err.status, 401);
+          assert.equal(err.statusCode, 401);
           done();
         });
     });

@@ -1,4 +1,9 @@
 
+1.1.3 / 2017-03-16
+==================
+
+  * Ensure the status code is passed through properly
+
 1.1.0 / 2017-01-31
 ==================
 
